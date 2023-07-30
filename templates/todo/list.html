@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <section class="vh-100" style="background-color: #3da2c3;">
+        <div class="container py-5 h-100">
+          <div class="row  justify-content-center align-items-center h-100">
+            <div class="col col-lg-8 col-xl-6">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
+                  <p class="mb-2"><span class="h2 me-2">To DO Task</span> <span
+                      class="badge bg-danger">version: 1.1</span></p>
+                      <form method="POST" >
+                            {% csrf_token %}
+                            <div class="row">
+                            <div class="col-sm-10">
+                            <input type="text" class="form-control" id="task_name" placeholder="Enter Task" name="title">
+                            </div>
+                            <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary" href="{% url 'index' %}">Add </button>
+                            </div>
+                            </div>
+                            
+                        </form>
+                    <div class="row">
+                    {% for task in tasks %}
+                    <div class="col-sm-8 pt-3">
+                        
+                        {% if task.complete == True %}
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked disabled>
+                            <s>{{task}}</s>
+                        {% else %}
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" disabled>
+                            <span>{{task}}</span>
+                        {% endif %}
+
+                    </div>
+                    <div class="col-sm-4 pt-3">
+                        <a href="{% url 'update_task' task.id%}" class="btn btn-outline-dark btn-sm">Update</a>
+                        <a href="{% url 'delete_task' task.id%}" class="btn btn-outline-danger btn-sm">Delete</a>
+                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+</html>

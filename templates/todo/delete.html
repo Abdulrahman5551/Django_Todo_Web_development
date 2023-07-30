@@ -1,0 +1,31 @@
+{% load static %}
+
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <div class="container  p-5 my-5 bg-danger text-white">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-6">
+                <p class="h4 text-info">Are you sure want to delete "{{item}}"?</p>
+            </div>
+        <div class="row pt-3">
+            <div class="col-sm-6 pt-8">
+                <button type="submit" class="btn btn-outline-light text-dark" href="{% url 'delete_task' item.id%}">Confirmed</button>
+                <a href="{% url 'index' %}" type="button" class="btn btn-outline-warning">Back</a>
+            </div>
+        </div>
+        </div>
+    </form>
+    </div>
+</body>
+</html>

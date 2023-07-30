@@ -1,0 +1,40 @@
+{% load static %}
+
+{% load widget_tweaks %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+</head>
+<body>
+    <div class="container  p-5 my-5 border">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+        <div class="col-sm-10">
+            <p class="h2 text-success">Edit Task</p>
+            {% render_field form.title type="text" class="form-control" placeholder="Name" %}
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 pt-2">
+                <p class="h5 text-success">complete:  
+                {% render_field form.complete  class="form-check-input" %}
+            </p>
+            </div>
+        </div>
+        <div class="row">
+        <div class="col-sm-4 pt-2">
+        <button type="submit" class="btn btn-outline-primary" href="{% url 'update_task' task.id%}">Go</button>
+        <button type="submit" class="btn btn-outline-warning" href="{% url 'index'%}">Back</button>
+        </div>
+        </div>
+    </form>
+    </div>
+</body>
+</html>
